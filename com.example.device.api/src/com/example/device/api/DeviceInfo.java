@@ -14,13 +14,13 @@ public class DeviceInfo
     public static final int MAX_WARPS_PER_SM = 64;
     public static final int MAX_THREADS_PER_SM = 2048;
     
-    private final int maxBlocksPerSM;
-    private final int maxRegistersPerSM;
-    private final int maxRegistersPerBlock;
-    private final int maxRegistersPerThread;
-    private final int sharedMemPerSM;
-    private final int sharedMemPerBlock;
-    private final int maxGridsPerDevice;
+    private int maxBlocksPerSM;
+    private int maxRegistersPerSM;
+    private int maxRegistersPerBlock;
+    private int maxRegistersPerThread;
+    private int sharedMemPerSM;
+    private int sharedMemPerBlock;
+    private int maxGridsPerDevice;
     
     public DeviceInfo(int maxBlocksPerSM, int maxRegistersPerSM,
                       int maxRegistersPerBlock, int maxRegistersPerThread, int sharedMemPerSM, int sharedMemPerBlock, int maxGridsPerDevice)

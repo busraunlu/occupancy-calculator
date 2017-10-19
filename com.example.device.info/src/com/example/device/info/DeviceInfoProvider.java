@@ -11,6 +11,8 @@ public class DeviceInfoProvider implements IDeviceInfo
 	
 	@Override
 	public DeviceInfo getDeviceInfo(ComputeCapability computeCapability) {
+		
+		
 		int maxBlocksPerSM = 0;
 		int maxRegistersPerSM = 0;
 		int maxRegistersPerBlock = 0;
@@ -47,19 +49,19 @@ public class DeviceInfoProvider implements IDeviceInfo
 		
 		
 		if(computeCapability == ComputeCapability.CC_30 || computeCapability == ComputeCapability.CC_32 || computeCapability == ComputeCapability.CC_35)
-			sharedMemPerSM = 48*CONSTANT*8;
+			sharedMemPerSM = 48*CONSTANT;
 		else if(computeCapability == ComputeCapability.CC_37)
-			sharedMemPerSM = 112*CONSTANT*8;
+			sharedMemPerSM = 112*CONSTANT;
 		else if(computeCapability == ComputeCapability.CC_52 || computeCapability == ComputeCapability.CC_61 || computeCapability == ComputeCapability.CC_70)
-			sharedMemPerSM = 96*CONSTANT*8;
+			sharedMemPerSM = 96*CONSTANT;
 		else 
-			sharedMemPerSM = 64*CONSTANT*8;
+			sharedMemPerSM = 64*CONSTANT;
 		
 		
 		if(computeCapability == ComputeCapability.CC_70)
-			sharedMemPerBlock = 96*(CONSTANT^19)*8;
+			sharedMemPerBlock = 96*(CONSTANT^19);
 		else
-			sharedMemPerBlock = 48*CONSTANT*8;
+			sharedMemPerBlock = 48*CONSTANT;
 		
 		
 		if(computeCapability == ComputeCapability.CC_32)
@@ -71,7 +73,10 @@ public class DeviceInfoProvider implements IDeviceInfo
 		else
 			maxGridsPerDevice = 32;
 	
-		return null;
+		DeviceInfo deviceinfo = new DeviceInfo(maxBlocksPerSM, maxRegistersPerSM, maxRegistersPerBlock, maxRegistersPerThread, sharedMemPerSM, sharedMemPerBlock, maxGridsPerDevice);
+		
+		//deviceinfo.getMaxBlocksPerSM();
+		return deviceinfo;
 	}
 	
 }
