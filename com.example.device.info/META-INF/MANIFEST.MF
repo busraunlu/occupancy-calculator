@@ -7,3 +7,5 @@ Bundle-Vendor: EXAMPLE
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Import-Package: com.example.device.api
 Export-Package: com.example.device.info
+Service-Component: OSGI-INF/device.info.provider.xml
+Bundle-ActivationPolicy: lazy

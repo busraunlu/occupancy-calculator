@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0" immediate="true" name="KernelAnalyzer">
+   <service>
+      <provide interface="com.example.kernel.api.IKernelAnalyzer"/>
+   </service>
+   <reference bind="bindKernelAnalyzer" interface="com.example.device.api.IDeviceInfo" name="KernelAnalyzer" unbind="unbindKernelAnalyzer"/>
+   <implementation class="com.example.kernel.analyzer.KernelAnalyzer"/>
+</scr:component>

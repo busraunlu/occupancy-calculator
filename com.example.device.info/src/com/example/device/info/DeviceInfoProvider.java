@@ -1,6 +1,8 @@
 package com.example.device.info;
 
-import com.example.device.api.ComputeCapability;
+import org.osgi.service.component.annotations.Component;
+
+import com.example.device.api.ComputeCapability; 
 import com.example.device.api.DeviceInfo;
 import com.example.device.api.IDeviceInfo;
 
@@ -75,7 +77,8 @@ public class DeviceInfoProvider implements IDeviceInfo
 	
 		DeviceInfo deviceinfo = new DeviceInfo(maxBlocksPerSM, maxRegistersPerSM, maxRegistersPerBlock, maxRegistersPerThread, sharedMemPerSM, sharedMemPerBlock, maxGridsPerDevice);
 		
-		//deviceinfo.getMaxBlocksPerSM();
+		System.out.println(deviceinfo.getMaxBlocksPerSM());
+		
 		return deviceinfo;
 	}
 	

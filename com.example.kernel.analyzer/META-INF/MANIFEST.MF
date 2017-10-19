@@ -1,0 +1,13 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Analyzer
+Bundle-SymbolicName: com.example.kernel.analyzer
+Bundle-Version: 1.0.0.qualifier
+Bundle-Vendor: EXAMPLE
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Import-Package: com.example.device.api,
+ com.example.device.info,
+ com.example.kernel.api,
+ org.osgi.service.component.annotations;version="1.2.0"
+Service-Component: OSGI-INF/KernelAnalyzer.xml
+Bundle-ActivationPolicy: lazy
