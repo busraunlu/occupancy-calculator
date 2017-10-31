@@ -46,7 +46,6 @@ public class KernelAnalyzer implements IKernelAnalyzer{
 		
 		   
 		analysisReport.setMessage(stringBuilder.toString());
-		//System.out.println(analysisReport.getMessage());
 		
 			if(dimensionControl && blockControl && threadControl && nControl && SMControl == true) {
 				analysisReport.setOccupancy(occupancy);
@@ -66,13 +65,7 @@ public class KernelAnalyzer implements IKernelAnalyzer{
 		 int N = Math.min(nRegister, nSM);
 		 int threadN = findNForThread(blockDimX,blockDimY);	 
 		 N = Math.min(N, threadN);
-		 
-		 /*		 int threadPerSM = N*blockDimX*blockDimY;
-		 
-		 	if(threadPerSM > DeviceInfo.MAX_THREADS_PER_SM ) {
-		 		
-			
-		 	}*/
+
 		 
 		 return N;
 		 	
@@ -92,12 +85,15 @@ public class KernelAnalyzer implements IKernelAnalyzer{
 	}
 	
 	public int findNForRegister(int blockDimX,int blockDimY,int numRegistersPerThread) {
-		int registerPerWarp = numRegistersPerThread * DeviceInfo.MAX_THREADS_PER_WARP;
+		
+		int registerPerWarp = numRegistersPerThread * DeviceInfo.MAX_THREADS_PER_WARP;    //32* registerperthread
 		float numberOfWarpForBlock = (blockDimX*blockDimY) / (float)DeviceInfo.MAX_THREADS_PER_WARP;
 		numberOfWarpForBlock = (float) Math.ceil(numberOfWarpForBlock);
-		
+	
 		float numberOfRegisterPerBlock = (numberOfWarpForBlock * registerPerWarp);
+		float x = (deviceInfo.getMaxRegistersPerSM()/numberOfRegisterPerBlock); 
 		int N = (int)(deviceInfo.getMaxRegistersPerSM()/numberOfRegisterPerBlock); // N is the number of block. 
+		
 		if(N>deviceInfo.getMaxBlocksPerSM()) {								//  Max Register per SM is divided into max register per block.
 			 N=deviceInfo.getMaxBlocksPerSM();
 			}
@@ -232,7 +228,6 @@ public class KernelAnalyzer implements IKernelAnalyzer{
 	public boolean blockDimensionYControl(int blockDimY) {
 		
 		if(blockDimY <= DeviceInfo.MAX_X_OR_Y_DIM_OF_BLOCK && blockDimY >= 0) {
-			this.stringBuilder.append("\nY dimension of block("+blockDimY+") is smaller than maximum limit("+DeviceInfo.MAX_X_OR_Y_DIM_OF_BLOCK+")");
 			return true;
 		}
 		throw new IllegalArgumentException("Y dimension of block("+blockDimY+") is bigger than maximum limit("+DeviceInfo.MAX_X_OR_Y_DIM_OF_BLOCK+")");
@@ -242,7 +237,6 @@ public class KernelAnalyzer implements IKernelAnalyzer{
 	public boolean blockDimensionXControl(int blockDimX) {
 		
 		if(blockDimX <= DeviceInfo.MAX_X_OR_Y_DIM_OF_BLOCK && blockDimX >= 0) {
-			this.stringBuilder.append("\nX dimension of block("+blockDimX+") is smaller than maximum limit("+DeviceInfo.MAX_X_OR_Y_DIM_OF_BLOCK+")");
 			
 			return true;
 		}
@@ -254,7 +248,6 @@ public class KernelAnalyzer implements IKernelAnalyzer{
 		
 		
 		if(gridDimX <= DeviceInfo.MAX_X_DIM_OF_GRID_OF_THREAD_BLOCKS && gridDimX >= 0) {
-			this.stringBuilder.append("\nX dimension of grid("+gridDimX+") is smaller than maximum limit("+DeviceInfo.MAX_X_DIM_OF_GRID_OF_THREAD_BLOCKS+")");
 
 			return true;
 		}
@@ -265,7 +258,6 @@ public class KernelAnalyzer implements IKernelAnalyzer{
 	public boolean gridDimensionYControl(int gridDimY){
 	
 			if(gridDimY <= DeviceInfo.MAX_Y_OR_Z_DIM_OF_GRID_OF_THREAD_BLOCKS && gridDimY >= 0) {
-				this.stringBuilder.append("\nY dimension of grid("+gridDimY+") is smaller than maximum limit("+DeviceInfo.MAX_Y_OR_Z_DIM_OF_GRID_OF_THREAD_BLOCKS+")");
 				return true;
 			}
 		
@@ -277,7 +269,6 @@ public class KernelAnalyzer implements IKernelAnalyzer{
 	public boolean numberOfGridPerDeviceControl(int gridDimX,int gridDimY) {
 		
 		if(0 <= (gridDimX * gridDimY) && (gridDimX * gridDimY) <= deviceInfo.getMaxGridsPerDevice()) {
-			this.stringBuilder.append("\nNumber of resident grids per device("+(gridDimX * gridDimY)+") is bigger than maximum limit("+deviceInfo.getMaxGridsPerDevice()+")");
 			return true;
 		}
 		
@@ -291,8 +282,8 @@ public class KernelAnalyzer implements IKernelAnalyzer{
 		this.stringBuilder = new StringBuilder();
 		this.stringBuilder.append("Service was set.");
         this.device = device;
-        //analyzeKernel(ComputeCapability.CC_53,5,2,15,4,10,100);
-        //System.out.println(analysisReport.getOccupancy());
+        analyzeKernel(ComputeCapability.CC_61,5,2,10,5,4000,200);
+       // System.out.println(analysisReport.getOccupancy());
       //  analyzeKernel(computeCapability, gridDimX, gridDimY, blockDimX, blockDimY, sharedMemPerBlock, numRegistersPerThread)
     }
 
