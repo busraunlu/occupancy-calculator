@@ -102,12 +102,12 @@ public class OccupancyAppPart {
 		Group group = new Group(parent, SWT.NONE);
 		GridData gd_group = new GridData(SWT.LEFT, SWT.CENTER, false, false, 4, 1);
 		gd_group.heightHint = 331;
-		gd_group.widthHint = 560;
+		gd_group.widthHint = 600;
 		group.setLayoutData(gd_group);
 		group.setText("<output>");
 		
 		Label lblNewLabel_output = new Label(group, SWT.NONE);
-		lblNewLabel_output.setBounds(10, 21, 500, 318);
+		lblNewLabel_output.setBounds(10, 21, 600, 318);
 //	    System.out.println(this.getClass().getSimpleName()
 //	    + " @PostConstruct method called.");
 		
