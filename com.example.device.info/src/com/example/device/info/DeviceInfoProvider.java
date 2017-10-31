@@ -61,7 +61,7 @@ public class DeviceInfoProvider implements IDeviceInfo
 		
 		
 		if(computeCapability == ComputeCapability.CC_70)
-			sharedMemPerBlock = 96*(CONSTANT^19);
+			sharedMemPerBlock = 96*CONSTANT;
 		else
 			sharedMemPerBlock = 48*CONSTANT;
 		
@@ -76,8 +76,7 @@ public class DeviceInfoProvider implements IDeviceInfo
 			maxGridsPerDevice = 32;
 	
 		DeviceInfo deviceinfo = new DeviceInfo(maxBlocksPerSM, maxRegistersPerSM, maxRegistersPerBlock, maxRegistersPerThread, sharedMemPerSM, sharedMemPerBlock, maxGridsPerDevice);
-		
-		System.out.println(deviceinfo.getMaxBlocksPerSM());
+
 		
 		return deviceinfo;
 	}

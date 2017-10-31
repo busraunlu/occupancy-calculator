@@ -13,16 +13,5 @@ public enum ComputeCapability
     CC_61, //8
     CC_62, //9
     CC_70; //10
-	
-	/*private int val;
-	
-	private ComputeCapability(int val)
-	{
-		this.val = val;
-	}
-	
-	public int getVal()
-	{
-		return val;
-	}*/
+
 }

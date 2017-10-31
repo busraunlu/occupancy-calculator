@@ -5,7 +5,7 @@ public class DeviceInfo
     public static final int MAX_THREADS_PER_BLOCK = 1024;
     public static final int MAX_THREADS_PER_WARP = 32;
     public static final int MAX_DIM_OF_GRID_OF_THREAD_BLOCKS = 3;
-    public static final int MAX_X_DIM_OF_GRID_OF_THREAD_BLOCKS = 2^31-1;
+    public static final int MAX_X_DIM_OF_GRID_OF_THREAD_BLOCKS = (int) (Math.pow(2,31)-1);
     public static final int MAX_Y_OR_Z_DIM_OF_GRID_OF_THREAD_BLOCKS = 65535;
     public static final int MAX_DIM_OF_THREAD_BLOCK = 3;
     public static final int MAX_X_OR_Y_DIM_OF_BLOCK = 1024;
